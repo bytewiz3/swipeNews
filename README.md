@@ -17,3 +17,13 @@ News Source: https://newsapi.org/
 ## Gander (Network Logging Tool)
 * Added this network debugging tool as a Retrofit interceptor.
 
+## Model-View-ViewModel (MVVM) and Repository
+* Created a Repository as an intermediate container for providing data.
+* Hided network requests behind the Repository.
+* Built ViewModel classes and used LiveData to provide updates for the future UI views.
+
+![MVVMandRepository](MVVMandRepository.png)
+
+## Stetho (Debugging Tool)
+* Utilized Stetho to view network requests and local database content.
+
