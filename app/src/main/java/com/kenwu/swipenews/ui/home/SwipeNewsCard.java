@@ -15,7 +15,8 @@ import com.mindorks.placeholderview.annotations.swipe.SwipeOut;
 import com.squareup.picasso.Picasso;
 
 @Layout(R.layout.swipe_news_card)
-public class SwipeNewsCard {
+public class SwipeNewsCard<OnSwipeListener> {
+    private final Article article;
     @View(R.id.news_image)
     private ImageView image;
 
@@ -25,10 +26,11 @@ public class SwipeNewsCard {
     @View(R.id.news_description)
     private TextView newsDescription;
 
-    private final Article article;
+    private final OnSwipeListener onSwipeListener;
 
-    public SwipeNewsCard(Article news) {
+    public SwipeNewsCard(Article news, OnSwipeListener onSwipeListener) {
         this.article = news;
+        this.onSwipeListener = onSwipeListener;
     }
 
     @Resolve
@@ -45,6 +47,7 @@ public class SwipeNewsCard {
     @SwipeOut
     private void onSwipedOut() {
         Log.d("EVENT", "onSwipedOut");
+        onSwipeListener.onDisLike(article);
     }
 
     @SwipeCancelState
@@ -55,6 +58,12 @@ public class SwipeNewsCard {
     @SwipeIn
     private void onSwipeIn() {
         Log.d("EVENT", "onSwipedIn");
+        article.favorite = true;
+        onSwipeListener.onLike(article);
     }
 
+    interface OnSwipeListener {
+        void onLike(Article news);
+        void onDisLike(Article news);
+    }
 }

@@ -28,7 +28,17 @@ News Source: https://newsapi.org/
 * Implemented SwipePlaceHolderView to present news on the home page for users to swipe.
 * Utilized View Binding to allow automatic binding UI layout resources with Java code.
 * Imported Picasso image downloading and caching library to handle image request
+* Added event listeners to save favorited news items.
 
 ## Search Page Implementation
 * Used RecyclerView (Adapter, LayoutManager) to display a scrolling list of elements based on large data sets.
 * Implemented the SpanSizeLookup for different grid size.
+* Added event listeners to save favorited news items.
+
+## DataBase with Room
+* Modified the Article class to serve as a Entity file.
+* Created DAO to contain the methods used for accessing the database.
+* Added Database to contain the database holder and serve as the main access point for the underlying connection to the app’s persisted, relational data. 
+* Created an AsyncTask for database execution.
+* Added onCancel function to prevent potential memory leak.
+

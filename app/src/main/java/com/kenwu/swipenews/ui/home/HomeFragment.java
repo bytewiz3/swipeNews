@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.kenwu.swipenews.databinding.FragmentHomeBinding;
 import com.kenwu.swipenews.model.Article;
@@ -17,10 +18,12 @@ import com.kenwu.swipenews.repository.NewsRepository;
 import com.kenwu.swipenews.repository.NewsViewModelFactory;
 import com.mindorks.placeholderview.SwipeDecor;
 
+import static android.widget.Toast.LENGTH_SHORT;
+
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements SwipeNewsCard.OnSwipeListener {
     private HomeViewModel viewModel;
     private FragmentHomeBinding binding;
 
@@ -62,12 +65,40 @@ public class HomeFragment extends Fragment {
                         newsResponse -> {
                             if (newsResponse != null) {
                                 for (Article article : newsResponse.articles) {
-                                    SwipeNewsCard swipeNewsCard = new SwipeNewsCard(article);
+                                    SwipeNewsCard swipeNewsCard = new SwipeNewsCard(article, this);
                                     binding.swipeView.addView(swipeNewsCard);
                                 }
 
                             }
                         });
+        viewModel.onFavorite()
+                .observe(
+                        getViewLifecycleOwner(),
+                        isSuccess -> {
+                            if (isSuccess) {
+                                Toast.makeText(getContext(), "Success", LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getContext(), "You might have liked before", LENGTH_SHORT).show();
+                            }
+                        });
 
+    }
+
+    @Override
+    public void onLike(Article news) {
+        viewModel.setFavoriteArticleInput(news);
+    }
+
+    @Override
+    public void onDisLike(Article news) {
+        if (binding.swipeView.getChildCount() < 3) {
+            viewModel.setCountryInput("us");
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        viewModel.onCancel();
     }
 }

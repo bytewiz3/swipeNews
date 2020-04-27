@@ -1,10 +1,15 @@
 package com.kenwu.swipenews.repository;
 
 import android.content.Context;
+import android.os.AsyncTask;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.kenwu.swipenews.SwipeNewsApplication;
+import com.kenwu.swipenews.database.AppDatabase;
+import com.kenwu.swipenews.model.Article;
 import com.kenwu.swipenews.model.NewsResponse;
 import com.kenwu.swipenews.network.NewsApi;
 import com.kenwu.swipenews.network.RetrofitClient;
@@ -15,9 +20,12 @@ import retrofit2.Response;
 
 public class NewsRepository {
     private final NewsApi newsApi;
+    private final AppDatabase database;
+    private AsyncTask asyncTask;
 
     public NewsRepository(Context context) {
         newsApi = RetrofitClient.newInstance(context).create(NewsApi.class);
+        database = SwipeNewsApplication.getDatabase();
     }
 
     public LiveData<NewsResponse> getTopHeadlines(String country) {
@@ -61,6 +69,35 @@ public class NewsRepository {
                             }
                         });
         return everyThingLiveData;
+    }
+
+    public LiveData<Boolean> favoriteArticle(Article article) {
+        MutableLiveData<Boolean> isSuccessLiveData = new MutableLiveData<>();
+        asyncTask = new AsyncTask<Void, Void, Boolean>() {
+            @Override
+            protected Boolean doInBackground(Void... voids) {
+                try {
+                    database.dao().saveArticle(article);
+                } catch (Exception e) {
+                    Log.e("test", e.getMessage());
+                    return false;
+                }
+                return true;
+            }
+
+            @Override
+            protected void onPostExecute(Boolean isSuccess) {
+                article.favorite = isSuccess;
+                isSuccessLiveData.setValue(isSuccess);
+            }
+        }.execute();
+        return isSuccessLiveData;
+    }
+
+    public void onCancel() {
+        if (asyncTask != null) {
+            asyncTask.cancel(true);
+        }
     }
 
 }
