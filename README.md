@@ -29,4 +29,6 @@ News Source: https://newsapi.org/
 * Utilized View Binding to allow automatic binding UI layout resources with Java code.
 * Imported Picasso image downloading and caching library to handle image request
 
-##
+## Search Page Implementation
+* Used RecyclerView (Adapter, LayoutManager) to display a scrolling list of elements based on large data sets.
+* Implemented the SpanSizeLookup for different grid size.
