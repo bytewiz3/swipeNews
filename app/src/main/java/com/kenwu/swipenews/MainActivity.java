@@ -6,8 +6,16 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.kenwu.swipenews.model.NewsResponse;
+import com.kenwu.swipenews.network.NewsApi;
+import com.kenwu.swipenews.network.RetrofitClient;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     private NavController navController;
@@ -23,6 +31,23 @@ public class MainActivity extends AppCompatActivity {
         navController = navHostFragment.getNavController();
         NavigationUI.setupWithNavController(navView, navController);
         NavigationUI.setupActionBarWithNavController(this, navController);
+
+        NewsApi api = RetrofitClient.newInstance(this).create(NewsApi.class);
+        api.getTopHeadlines("US").enqueue(new Callback<NewsResponse>() {
+            @Override
+            public void onResponse(Call<NewsResponse> call, Response<NewsResponse> response) {
+                if (response.isSuccessful()) {
+                    Log.d("getTopHeadlines", response.body().toString());
+                } else {
+                    Log.d("getTopHeadlines", response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<NewsResponse> call, Throwable t) {
+                Log.d("getTopHeadlines", t.toString());
+            }
+        });
     }
 
     @Override
