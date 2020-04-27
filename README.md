@@ -14,8 +14,8 @@ News Source: https://newsapi.org/
 * Added three model classes (Source, Article and NewsResponse).
 * Created NewsApi with retrofit (OkHttp, Gson) to get news responses.
 
-## Gander (Network Logging Tool)
-* Added this network debugging tool as a Retrofit interceptor.
+## Gander/Stetho (Debugging/Logging Tool)
+* Utilized these two tools to view network requests and local database content.
 
 ## Model-View-ViewModel (MVVM) and Repository
 * Created a Repository as an intermediate container for providing data.
@@ -24,6 +24,9 @@ News Source: https://newsapi.org/
 
 ![MVVMandRepository](MVVMandRepository.png)
 
-## Stetho (Debugging Tool)
-* Utilized Stetho to view network requests and local database content.
+## Home Page Layout / UI Interaction Setup
+* Implemented SwipePlaceHolderView to present news on the home page for users to swipe.
+* Utilized View Binding to allow automatic binding UI layout resources with Java code.
+* Imported Picasso image downloading and caching library to handle image request
 
+##
