@@ -15,7 +15,7 @@ import com.mindorks.placeholderview.annotations.swipe.SwipeOut;
 import com.squareup.picasso.Picasso;
 
 @Layout(R.layout.swipe_news_card)
-public class SwipeNewsCard<OnSwipeListener> {
+public class SwipeNewsCard {
     private final Article article;
     @View(R.id.news_image)
     private ImageView image;
