@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/navigation_home" >
+    app:startDestination="@id/navigation_home">
 
     <fragment
         android:id="@+id/navigation_home"
@@ -14,11 +14,28 @@
         android:id="@+id/navigation_save"
         android:name="com.kenwu.swipenews.ui.save.SaveFragment"
         android:label="@string/title_save"
-        tools:layout="@layout/fragment_save" />
+        tools:layout="@layout/fragment_save">
+        <action
+            android:id="@+id/action_title_save_to_detail"
+            app:destination="@+id/navigation_detail"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"></action>
+    </fragment>
     <fragment
         android:id="@+id/navigation_search"
         android:name="com.kenwu.swipenews.ui.search.SearchFragment"
         android:label="@string/title_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_title_search_to_detail"
+            app:destination="@id/navigation_detail"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"></action>
+    </fragment>
 
+    <fragment
+        android:id="@+id/navigation_detail"
+        android:name="com.kenwu.swipenews.ui.detail.SavedNewsDetailFragment"
+        android:label="@string/title_detail"
+        tools:layout="@layout/fragment_saved_news_detail" />
 </navigation>
