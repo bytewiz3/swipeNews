@@ -43,3 +43,13 @@ News Source: https://newsapi.org/
 * Created an AsyncTask for database execution.
 * Added onCancel function to prevent potential memory leak.
 
+### Save Page Implementation
+* Set up SaveViewModel to handle favorited news by users.
+* Utilized RecyclerView to present saved news items.
+
+### Detailed News Fragment
+* Enabled Gradle with SafeArgs plugin to pass news articles among fragments.
+
+### UI Optimization
+* Colors, strings, styles and dimensions management.
+* Language support.

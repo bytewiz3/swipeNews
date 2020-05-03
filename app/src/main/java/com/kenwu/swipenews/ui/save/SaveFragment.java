@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.kenwu.swipenews.R;
 import com.kenwu.swipenews.databinding.FragmentSaveBinding;
 import com.kenwu.swipenews.model.Article;
 import com.kenwu.swipenews.repository.NewsRepository;
@@ -60,7 +62,9 @@ public class SaveFragment extends Fragment {
         savedNewsAdapter.setOnClickListener(new SavedNewsAdapter.OnClickListener() {
             @Override
             public void onClick(Article article) {
-
+                SaveFragmentDirections.ActionTitleSaveToDetail actionTitleSaveToDetail = SaveFragmentDirections.actionTitleSaveToDetail();
+                actionTitleSaveToDetail.setArticle(article);
+                NavHostFragment.findNavController(SaveFragment.this).navigate(actionTitleSaveToDetail);
             }
 
             @Override
