@@ -7,4 +7,11 @@
     <string name="unknown_author">未知作者</string>
     <string name="description">描述:</string>
     <string name='author'>作者:</string>
+
+    <string name="password">密码</string>
+    <string name="login">登入</string>
+    <string name="sign_up">注册</string>
+
+    <string name="photo">拍照</string>
+    <string name="gallery">相册</string>
 </resources>

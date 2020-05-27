@@ -1,2 +1,3 @@
 rootProject.name='SwipeNews'
 include ':app'
+include ':mylibrary'
