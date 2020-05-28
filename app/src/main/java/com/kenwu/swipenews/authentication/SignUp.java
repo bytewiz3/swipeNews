@@ -76,6 +76,7 @@ public class SignUp extends AppCompatActivity {
     private FirebaseDatabase database;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +86,7 @@ public class SignUp extends AppCompatActivity {
         FirebaseAuth auth = FirebaseAuth.getInstance();
 
         // Initialize Places.
-        Places.initialize(getApplicationContext(), "AIzaSyAAzAER-HprZhx5zvmEYIjVlJfYSHj2-G8");
+        Places.initialize(getApplicationContext(), "AIzaSyC8fSIy2uYIQA1qsVJfWsFjjuJCxRdUNdE");
         // Create a new Places client instance.
         PlacesClient placesClient = Places.createClient(this);
         // Set the fields to specify which types of place data to return.
